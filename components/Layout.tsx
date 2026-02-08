@@ -13,10 +13,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-xl font-bold shadow-indigo-200 shadow-lg">
-              C
+              M
             </div>
             <h1 className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-              CodeVisual Academy
+              Learn with MZ
             </h1>
           </div>
           <nav className="hidden md:flex space-x-6 text-sm font-medium text-slate-600">
@@ -41,7 +41,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <footer className="bg-slate-50 border-t border-slate-200 py-12">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-slate-500 text-sm">
-            © 2024 CodeVisual Academy. Built for beginners with love.
+            © 2026 Learn with MZ. Built for beginners with love.
           </p>
         </div>
       </footer>

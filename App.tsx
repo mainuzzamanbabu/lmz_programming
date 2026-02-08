@@ -17,7 +17,7 @@ const App: React.FC = () => {
 
   return (
     <Layout>
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 relative">
+      <div className="grid grid-cols-1 lg:grid-cols-12 xl:grid-cols-12 gap-8 relative items-start">
         {/* Mobile Concept Selector */}
         <div className="lg:hidden mb-6 sticky top-[72px] z-40">
            <button 
@@ -53,8 +53,8 @@ const App: React.FC = () => {
         </div>
 
         {/* Sidebar Navigation - Desktop */}
-        <aside className="hidden lg:block lg:col-span-3 space-y-2 sticky top-24 h-fit">
-          <h2 className="text-xs font-black text-slate-400 uppercase tracking-widest px-4 mb-6">
+        <aside className="hidden lg:block lg:col-span-3 space-y-2 sticky top-24 h-[calc(100vh-8rem)] overflow-y-auto pr-4 pb-8 custom-scrollbar">
+          <h2 className="text-xs font-black text-slate-400 uppercase tracking-widest px-4 mb-6 sticky top-0 bg-[#f8fafc] py-2 z-10">
             Learning Path
           </h2>
           <div className="space-y-1">
@@ -95,7 +95,7 @@ const App: React.FC = () => {
         </aside>
 
         {/* Content Area */}
-        <div className="lg:col-span-9 space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+        <div className="lg:col-span-9 xl:col-span-9 space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
           <section className="bg-white rounded-[2.5rem] p-8 md:p-12 border border-slate-200 shadow-sm relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-50 rounded-full -translate-y-1/2 translate-x-1/2 -z-0"></div>
             
