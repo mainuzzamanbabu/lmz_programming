@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 interface DjangoVisualizerProps {
-  type: 'mvt' | 'url-routing' | 'views' | 'dtl' | 'template-inheritance' | 'orm' | 'migrations' | 'forms' | 'crud' | 'relationships' | 'middleware' | 'auth' | 'deployment';
+  type: 'virtual-env' | 'getting-started' | 'project-structure' | 'mvt' | 'url-routing' | 'views' | 'dtl' | 'template-inheritance' | 'orm' | 'migrations' | 'forms' | 'crud' | 'relationships' | 'middleware' | 'auth' | 'deployment';
 }
 
 const DjangoVisualizer: React.FC<DjangoVisualizerProps> = ({ type }) => {
@@ -18,10 +18,72 @@ const DjangoVisualizer: React.FC<DjangoVisualizerProps> = ({ type }) => {
 
   const renderVisual = () => {
     switch (type) {
+      case 'virtual-env':
+        return (
+          <div className="flex items-center justify-center space-x-6 h-48">
+            {[
+              { name: 'Project A', pkgs: ['Django 4.0', 'Pillow'], color: 'border-blue-400 bg-blue-50' },
+              { name: 'Project B', pkgs: ['Django 5.0', 'NumPy'], color: 'border-purple-400 bg-purple-50' },
+            ].map((env, i) => (
+              <div key={env.name} className={`w-32 border-2 ${env.color} rounded-2xl p-3 transition-all duration-500 ${step % 2 === i ? 'scale-110 shadow-lg -translate-y-2' : 'opacity-60'}`}>
+                <div className="text-[10px] font-black text-center mb-2 uppercase tracking-widest">🧰 {env.name}</div>
+                {env.pkgs.map(pkg => (
+                  <div key={pkg} className="text-[10px] font-mono bg-white/60 px-2 py-1 rounded mb-1 text-center">{pkg}</div>
+                ))}
+              </div>
+            ))}
+          </div>
+        );
+
+      case 'getting-started': {
+        const commands = [
+          { cmd: 'python -m venv myenv', icon: '📦', label: 'Create Env' },
+          { cmd: 'myenv\\Scripts\\activate', icon: '⚡', label: 'Activate' },
+          { cmd: 'pip install django', icon: '🎯', label: 'Install' },
+          { cmd: 'django-admin startproject mysite', icon: '🏗️', label: 'Create Project' },
+          { cmd: 'python manage.py runserver', icon: '🚀', label: 'Launch!' },
+        ];
+        return (
+          <div className="p-4 space-y-2">
+            {commands.map((c, i) => (
+              <div key={c.cmd} className={`flex items-center space-x-3 p-2 rounded-xl transition-all duration-500 ${step % 5 === i ? 'bg-orange-50 border border-orange-200 scale-[1.02] shadow-sm' : i < step % 5 ? 'bg-green-50 border border-green-100' : 'bg-white/50'}`}>
+                <span className="text-lg">{i < step % 5 ? '✅' : c.icon}</span>
+                <div className="flex-1">
+                  <span className="font-mono text-xs font-bold text-slate-700">{c.cmd}</span>
+                  <div className={`text-[9px] font-bold ${step % 5 === i ? 'text-orange-500' : 'text-slate-400'}`}>{c.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+      }
+
+      case 'project-structure': {
+        const files = [
+          { name: 'manage.py', icon: '🎮', role: 'Remote Control' },
+          { name: 'settings.py', icon: '⚙️', role: 'Control Center' },
+          { name: 'urls.py', icon: '🗺️', role: 'Receptionist' },
+          { name: 'models.py', icon: '📊', role: 'Data Schema' },
+          { name: 'views.py', icon: '🧠', role: 'Business Logic' },
+        ];
+        return (
+          <div className="p-4 space-y-2">
+            {files.map((f, i) => (
+              <div key={f.name} className={`flex items-center space-x-3 p-2 rounded-xl transition-all duration-500 ${step % 5 === i ? 'bg-orange-50 border border-orange-200 scale-[1.02]' : 'bg-white/50'}`}>
+                <span className="text-lg">{f.icon}</span>
+                <span className="font-mono text-xs font-bold text-slate-700 w-24">{f.name}</span>
+                <span className={`text-[10px] font-bold transition-opacity duration-500 ${step % 5 === i ? 'text-orange-600 opacity-100' : 'text-slate-400 opacity-50'}`}>{f.role}</span>
+              </div>
+            ))}
+          </div>
+        );
+      }
+
       case 'mvt': {
         const tabs = [
-          { label: 'Model', icon: '👨‍🍳', subtitle: 'The Chef', color: 'bg-emerald-500' },
+          { label: 'Model', icon: '�‍🍳', subtitle: 'The Chef', color: 'bg-emerald-500' },
           { label: 'View', icon: '🤵', subtitle: 'The Waiter', color: 'bg-indigo-500' },
+          { label: 'URL', icon: '🚪', subtitle: 'The Host', color: 'bg-rose-500' },
           { label: 'Template', icon: '🍽️', subtitle: 'The Plate', color: 'bg-amber-500' },
         ];
         return (
@@ -35,10 +97,11 @@ const DjangoVisualizer: React.FC<DjangoVisualizerProps> = ({ type }) => {
                 </button>
               ))}
             </div>
-            <div className="bg-white rounded-xl p-4 border border-slate-200 min-h-[100px] flex items-center justify-center">
+            <div className="bg-white rounded-xl p-4 border border-slate-200 min-h-[120px] flex items-center justify-center">
               {activeTab === 0 && <div className="text-center"><div className="text-sm font-bold text-slate-700 mb-1">models.py</div><div className="text-[10px] text-slate-500">Defines database structure</div><div className="font-mono text-[10px] bg-slate-100 p-2 rounded mt-2">class Student(models.Model): ...</div></div>}
               {activeTab === 1 && <div className="text-center"><div className="text-sm font-bold text-slate-700 mb-1">views.py</div><div className="text-[10px] text-slate-500">Business logic & coordination</div><div className="font-mono text-[10px] bg-slate-100 p-2 rounded mt-2">def student_list(request): ...</div></div>}
-              {activeTab === 2 && <div className="text-center"><div className="text-sm font-bold text-slate-700 mb-1">template.html</div><div className="text-[10px] text-slate-500">HTML + dynamic data</div><div className="font-mono text-[10px] bg-slate-100 p-2 rounded mt-2">{'{{ student.name }}'}</div></div>}
+              {activeTab === 2 && <div className="text-center w-full"><div className="text-sm font-bold text-slate-700 mb-1">urls.py</div><div className="text-[10px] text-slate-500 mb-2">Routes requests to the right View</div><div className="font-mono text-[10px] bg-slate-100 p-2 rounded text-left space-y-1"><div className="text-rose-600 font-bold"># mysite/urls.py (Project)</div><div>path('students/', <span className="text-indigo-600">include('students.urls')</span>)</div><div className="mt-2 text-rose-600 font-bold"># students/urls.py (App)</div><div>path('', <span className="text-indigo-600">views.student_list</span>)</div></div></div>}
+              {activeTab === 3 && <div className="text-center"><div className="text-sm font-bold text-slate-700 mb-1">template.html</div><div className="text-[10px] text-slate-500">HTML + dynamic data</div><div className="font-mono text-[10px] bg-slate-100 p-2 rounded mt-2">{'{{ student.name }}'}</div></div>}
             </div>
           </div>
         );

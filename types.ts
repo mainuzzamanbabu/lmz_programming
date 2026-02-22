@@ -42,7 +42,7 @@ export interface BackendConcept {
     description: string;
     icon: string;
   };
-  visualType: 'client-server' | 'http-methods' | 'status-codes' | 'database' | 'sessions' | 'framework-compare' | 'virtual-env' | 'project-structure';
+  visualType: 'client-server' | 'http-methods' | 'status-codes' | 'database' | 'sessions' | 'framework-compare';
   content: string[];
   codeExamples?: BackendCodeExample[];
   keyPoints: string[];
@@ -63,7 +63,7 @@ export interface DjangoConcept {
     description: string;
     icon: string;
   };
-  visualType: 'mvt' | 'url-routing' | 'views' | 'dtl' | 'template-inheritance' | 'orm' | 'migrations' | 'forms' | 'crud' | 'relationships' | 'middleware' | 'auth' | 'deployment';
+  visualType: 'virtual-env' | 'getting-started' | 'project-structure' | 'mvt' | 'url-routing' | 'views' | 'dtl' | 'template-inheritance' | 'orm' | 'migrations' | 'forms' | 'crud' | 'relationships' | 'middleware' | 'auth' | 'deployment';
   content: string[];
   codeExamples?: BackendCodeExample[];
   keyPoints: string[];

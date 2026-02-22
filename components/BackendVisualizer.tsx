@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 interface BackendVisualizerProps {
-  type: 'client-server' | 'http-methods' | 'status-codes' | 'database' | 'sessions' | 'framework-compare' | 'virtual-env' | 'project-structure';
+  type: 'client-server' | 'http-methods' | 'status-codes' | 'database' | 'sessions' | 'framework-compare';
 }
 
 const BackendVisualizer: React.FC<BackendVisualizerProps> = ({ type }) => {
@@ -193,44 +193,6 @@ const BackendVisualizer: React.FC<BackendVisualizerProps> = ({ type }) => {
             </div>
           </div>
         );
-
-      case 'virtual-env':
-        return (
-          <div className="flex items-center justify-center space-x-6 h-48">
-            {[
-              { name: 'Project A', pkgs: ['Django 4.0', 'Pillow'], color: 'border-blue-400 bg-blue-50' },
-              { name: 'Project B', pkgs: ['Django 5.0', 'NumPy'], color: 'border-purple-400 bg-purple-50' },
-            ].map((env, i) => (
-              <div key={env.name} className={`w-32 border-2 ${env.color} rounded-2xl p-3 transition-all duration-500 ${step % 2 === i ? 'scale-110 shadow-lg -translate-y-2' : 'opacity-60'}`}>
-                <div className="text-[10px] font-black text-center mb-2 uppercase tracking-widest">🧰 {env.name}</div>
-                {env.pkgs.map(pkg => (
-                  <div key={pkg} className="text-[10px] font-mono bg-white/60 px-2 py-1 rounded mb-1 text-center">{pkg}</div>
-                ))}
-              </div>
-            ))}
-          </div>
-        );
-
-      case 'project-structure': {
-        const files = [
-          { name: 'manage.py', icon: '🎮', role: 'Remote Control' },
-          { name: 'settings.py', icon: '⚙️', role: 'Control Center' },
-          { name: 'urls.py', icon: '🗺️', role: 'Receptionist' },
-          { name: 'models.py', icon: '📊', role: 'Data Schema' },
-          { name: 'views.py', icon: '🧠', role: 'Business Logic' },
-        ];
-        return (
-          <div className="p-4 space-y-2">
-            {files.map((f, i) => (
-              <div key={f.name} className={`flex items-center space-x-3 p-2 rounded-xl transition-all duration-500 ${step % 5 === i ? 'bg-indigo-50 border border-indigo-200 scale-[1.02]' : 'bg-white/50'}`}>
-                <span className="text-lg">{f.icon}</span>
-                <span className="font-mono text-xs font-bold text-slate-700 w-24">{f.name}</span>
-                <span className={`text-[10px] font-bold transition-opacity duration-500 ${step % 5 === i ? 'text-indigo-600 opacity-100' : 'text-slate-400 opacity-50'}`}>{f.role}</span>
-              </div>
-            ))}
-          </div>
-        );
-      }
 
       default:
         return null;

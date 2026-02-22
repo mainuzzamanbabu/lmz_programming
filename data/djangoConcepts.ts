@@ -4,6 +4,149 @@ import { DjangoCurriculum } from '../types';
 export const DJANGO_CURRICULUM: DjangoCurriculum = {
   concepts: [
     {
+      id: 'virtual-envs',
+      title: 'Virtual Environments: The Mechanic\'s Toolboxes',
+      shortDescription: 'Keep your projects isolated so their tools don\'t clash.',
+      metaphor: {
+        title: 'Separate Toolboxes',
+        description: 'Imagine a mechanic working on two cars. Car A requires metric tools. Car B requires imperial tools. If the mechanic throws all tools into one giant pile, they\'ll grab the wrong wrench. A Virtual Environment is a separate, sealed toolbox for each car.',
+        icon: '🧰'
+      },
+      visualType: 'virtual-env',
+      content: [
+        'Before installing Django, you must understand Virtual Environments. They solve the "Dependency Hell" problem.',
+        'Without virtual environments, ALL Python packages install globally. If Project A needs Django 4.0 and Project B needs Django 5.0, they conflict. Installing one version overwrites the other.',
+        'A Virtual Environment (venv) creates an isolated Python installation for EACH project. The packages installed for Project A effectively do not exist for Project B.',
+        'Think of it as having separate app stores for your work phone and personal phone — installing TikTok on one doesn\'t install it on the other.'
+      ],
+      codeExamples: [
+        {
+          language: 'bash',
+          label: 'Step 1: Create Environment',
+          code: 'python -m venv my_env',
+          explanation: 'This creates a new folder called "my_env" with its own Python installation. It\'s like building a new, empty toolbox.'
+        },
+        {
+          language: 'bash',
+          label: 'Step 2: Activate (Windows)',
+          code: 'my_env\\\\Scripts\\\\activate\\n\\n# Your prompt changes to:\\n(my_env) C:\\\\Users\\\\you>',
+          explanation: 'Activating the environment is like "opening" the toolbox. Now any tool (package) you install goes into THIS toolbox only.'
+        },
+        {
+          language: 'bash',
+          label: 'Step 3: Install Django',
+          code: '(my_env) pip install django\\n\\n# Django is now ONLY inside my_env\\n# Other projects cannot see it',
+          explanation: 'Django is installed only inside this virtual environment. Your global Python and other projects are completely unaffected.'
+        }
+      ],
+      keyPoints: [
+        'Virtual Environment = An isolated Python installation per project',
+        'Prevents dependency conflicts between projects',
+        'Always create a venv BEFORE installing any packages',
+        'Activate with: my_env\\\\Scripts\\\\activate (Windows)',
+        'Deactivate with: deactivate'
+      ],
+      interactiveHint: 'Try the terminal commands below to create and activate a virtual environment!'
+    },
+    {
+      id: 'getting-started',
+      title: 'Getting Started: Your First Django Project',
+      shortDescription: 'From zero to a running server — the exact commands to launch your first project.',
+      metaphor: {
+        title: 'Opening a New Restaurant',
+        description: 'Starting a Django project is like opening a new restaurant. First, you set up your private kitchen (virtual environment). Then you install your equipment (pip install django). Next, you create the building blueprint (startproject). Finally, you open your doors and serve your first customer (runserver).',
+        icon: '🚀'
+      },
+      visualType: 'getting-started',
+      content: [
+        'Starting a Django project follows a specific ritual that every Django developer knows by heart. These commands are the foundation of every Django application.',
+        'Step 1: Create and activate a virtual environment. This keeps your project\'s dependencies isolated. Step 2: Install Django using pip. Step 3: Use django-admin startproject to generate the project skeleton. Step 4: Run the development server to see Django\'s welcome page.',
+        'The development server (runserver) is a lightweight web server included with Django. It auto-reloads when you change code, making development fast and interactive. You\'ll see the iconic "The install worked successfully!" page at http://127.0.0.1:8000/.',
+        'After creating the project, use startapp to create your first app module. Remember: a Project is the entire website, and an App is a feature module within it (e.g., a blog app, a users app).'
+      ],
+      codeExamples: [
+        {
+          language: 'bash',
+          label: 'Step 1: Set Up Virtual Environment',
+          code: '# Create a virtual environment\\npython -m venv myenv\\n\\n# Activate it (Windows)\\nmyenv\\\\Scripts\\\\activate\\n\\n# Your terminal shows:\\n(myenv) C:\\\\Users\\\\you>',
+          explanation: 'Always start by creating an isolated environment. This prevents package conflicts between projects.'
+        },
+        {
+          language: 'bash',
+          label: 'Step 2: Install Django',
+          code: '# Install Django inside the virtual env\\n(myenv) pip install django\\n\\n# Verify installation\\n(myenv) python -m django --version\\n# Output: 5.1.5',
+          explanation: 'pip install django downloads and installs the latest stable version. The --version flag confirms it installed correctly.'
+        },
+        {
+          language: 'bash',
+          label: 'Step 3: Create Your Project',
+          code: '# Create a new Django project\\n(myenv) django-admin startproject mysite\\n\\n# Navigate into the project\\n(myenv) cd mysite',
+          explanation: 'django-admin startproject creates the entire project skeleton — manage.py, settings.py, urls.py, and more. You only run this ONCE per project.'
+        },
+        {
+          language: 'bash',
+          label: 'Step 4: Run the Server!',
+          code: '# Start the development server\\n(myenv) python manage.py runserver\\n\\n# Output:\\n# Starting development server at\\n# http://127.0.0.1:8000/\\n# Quit the server with CTRL-BREAK.',
+          explanation: 'Visit http://127.0.0.1:8000/ in your browser — you\'ll see Django\'s "The install worked successfully!" rocket page. Congratulations, you\'re running Django!'
+        },
+        {
+          language: 'bash',
+          label: 'Step 5: Create Your First App',
+          code: '# Create an app called "students"\\n(myenv) python manage.py startapp students\\n\\n# Don\'t forget to register it in\\n# settings.py → INSTALLED_APPS!',
+          explanation: 'startapp creates a new module within your project. Each app handles a specific feature. Always add it to INSTALLED_APPS in settings.py!'
+        }
+      ],
+      keyPoints: [
+        'python -m venv myenv → Create virtual environment',
+        'myenv\\\\Scripts\\\\activate → Activate it (Windows)',
+        'pip install django → Install Django',
+        'django-admin startproject mysite → Create project skeleton',
+        'python manage.py runserver → Start development server at port 8000',
+        'python manage.py startapp appname → Create a new app module'
+      ],
+      interactiveHint: 'Follow along in the terminal simulator — run each command step by step to launch your first Django project!'
+    },
+    {
+      id: 'project-structure',
+      title: 'Django Project Structure: The Anatomy',
+      shortDescription: 'Every file Django creates has a specific purpose. Let\'s explore each one.',
+      metaphor: {
+        title: 'The Building Departments',
+        description: 'manage.py is the Remote Control — you use it to run the server, create database tables, and manage everything. settings.py is the Control Center — it configures how the project behaves. urls.py is the Receptionist — it directs incoming visitors to the right rooms.',
+        icon: '📁'
+      },
+      visualType: 'project-structure',
+      content: [
+        'When you run django-admin startproject mysite, Django creates a specific directory structure. Each file has a role, and understanding them is crucial.',
+        'A Django Project is the entire website (e.g., "University Portal"). An App is a self-contained module within that project (e.g., "Admissions App", "Gradebook App", "Forum App"). One project contains many apps.',
+        'Rule of Thumb: A project is a collection of apps and configurations. An app can theoretically be unplugged from one project and plugged into another.',
+        'The project structure follows the principle of "Convention over Configuration" — Django has strong opinions about where things go, which makes collaboration easier because every Django project looks the same.'
+      ],
+      codeExamples: [
+        {
+          language: 'text',
+          label: 'Project Structure',
+          code: 'mysite/              ← Project root\\n├── manage.py        ← 🎮 Remote Control\\n├── mysite/          ← Configuration package\\n│   ├── __init__.py  ← Makes it a Python package\\n│   ├── settings.py  ← ⚙️ Control Center\\n│   ├── urls.py      ← 🗺️ Receptionist/Router\\n│   ├── wsgi.py      ← 🔌 Production hookup\\n│   └── asgi.py      ← 🔌 Async hookup\\n└── myapp/           ← Your custom app\\n    ├── models.py    ← 📊 Database definitions\\n    ├── views.py     ← 🧠 Business logic\\n    ├── urls.py      ← 🗺️ App-level routing\\n    └── templates/   ← 🎨 HTML files',
+          explanation: 'Each file has a specific job. This separation of concerns makes the project maintainable as it grows.'
+        },
+        {
+          language: 'bash',
+          label: 'Creating a Project & App',
+          code: '# Create the project\\ndjango-admin startproject mysite\\n\\n# Navigate inside\\ncd mysite\\n\\n# Create an app\\npython manage.py startapp myapp\\n\\n# Run the server\\npython manage.py runserver',
+          explanation: 'These are the first commands every Django developer runs. startproject creates the skeleton, startapp creates a module within it.'
+        }
+      ],
+      keyPoints: [
+        'manage.py = Command-line utility (start server, run migrations, create superuser)',
+        'settings.py = Configuration (database, timezone, installed apps, security keys)',
+        'urls.py = URL routing table (maps URLs to views)',
+        'wsgi.py / asgi.py = Interface between Django and the production web server',
+        'Project = The entire website | App = A self-contained feature module',
+        'Apps are reusable — they can be moved between projects'
+      ],
+      interactiveHint: 'Explore the interactive file tree below — click any file to see its role and analogy!'
+    },
+    {
       id: 'mvt',
       title: 'MVT Architecture: The Restaurant Crew',
       shortDescription: 'Model-View-Template — Django\'s way of organizing code into three clean layers.',
@@ -14,8 +157,9 @@ export const DJANGO_CURRICULUM: DjangoCurriculum = {
       },
       visualType: 'mvt',
       content: [
-        'Django organizes code into three layers: Model (Data), View (Logic), and Template (Design). This separation makes code clean and manageable.',
-        'The flow: User requests a URL → Django matches URL to a View → View asks Model for data → View gives data to Template → Beautiful HTML sent to user.',
+        'Django organizes code into four key components: URLs (Routing), View (Logic), Model (Data), and Template (Design). This separation makes code clean and manageable.',
+        'The flow: User requests a URL → urls.py matches the URL pattern to a View → View asks Model for data → View gives data to Template → Beautiful HTML sent to user.',
+        'Django has TWO levels of URL routing. The project-level urls.py (mysite/urls.py) acts as the main receptionist — it uses include() to forward requests to the correct app. Each app then has its OWN urls.py that handles its specific routes.',
         'This is a variation of the famous MVC (Model-View-Controller) pattern used in software engineering. The key difference: Django\'s "View" acts as the Controller, and the "Template" is what MVC calls the "View".'
       ],
       codeExamples: [
@@ -32,6 +176,12 @@ export const DJANGO_CURRICULUM: DjangoCurriculum = {
           explanation: 'The View receives the request, fetches data from the Model, and passes it to the Template. The Waiter coordinates.'
         },
         {
+          language: 'python',
+          label: 'URLs (urls.py) — The Host',
+          code: '# mysite/urls.py (Project-level)\nfrom django.urls import path, include\n\nurlpatterns = [\n    path(\'students/\', include(\'students.urls\')),\n    path(\'admin/\', admin.site.urls),\n]\n\n# students/urls.py (App-level)\nfrom django.urls import path\nfrom . import views\n\nurlpatterns = [\n    path(\'\', views.student_list, name=\'list\'),\n    path(\'<int:id>/\', views.student_detail, name=\'detail\'),\n]',
+          explanation: 'The project urls.py uses include() to delegate to each app. The app urls.py maps specific URL patterns to view functions. Like a hotel receptionist forwarding calls to departments.'
+        },
+        {
           language: 'html',
           label: 'Template (list.html) — The Plate',
           code: '<h1>Class List</h1>\n<ul>\n  {% for student in students %}\n    <li>\n      {{ student.name }} — {{ student.score }}\n    </li>\n  {% endfor %}\n</ul>',
@@ -41,9 +191,11 @@ export const DJANGO_CURRICULUM: DjangoCurriculum = {
       keyPoints: [
         'Model = Defines database structure (the Chef / data handler)',
         'View = Business logic & coordination (the Waiter)',
-        'Template = HTML presentation (the Plate)',
         'URL Dispatcher = Routes requests to the right View (the Host)',
-        'Separation of concerns = each layer has ONE job'
+        'Project urls.py uses include() to forward to app urls.py',
+        'App urls.py maps specific URL patterns to view functions',
+        'Template = HTML presentation (the Plate)',
+        'Separation of concerns = each component has ONE job'
       ],
       interactiveHint: 'Click the tabs below to see how each MVT component works — with code and analogy side by side!'
     },
