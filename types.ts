@@ -73,3 +73,24 @@ export interface DjangoConcept {
 export interface DjangoCurriculum {
   concepts: DjangoConcept[];
 }
+
+// Django REST Framework types
+export interface DrfConcept {
+  id: string;
+  title: string;
+  shortDescription: string;
+  metaphor: {
+    title: string;
+    description: string;
+    icon: string;
+  };
+  visualType: 'drf-intro' | 'drf-serializers' | 'drf-views' | 'drf-urls' | 'drf-school';
+  content: string[];
+  codeExamples?: BackendCodeExample[];
+  keyPoints: string[];
+  interactiveHint: string;
+}
+
+export interface DrfCurriculum {
+  concepts: DrfConcept[];
+}

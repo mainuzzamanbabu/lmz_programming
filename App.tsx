@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import ProgrammingPage from './pages/ProgrammingPage';
 import BackendPage from './pages/BackendPage';
 import DjangoPage from './pages/DjangoPage';
+import DrfPage from './pages/DrfPage';
 
 const App: React.FC = () => {
   return (
@@ -14,9 +15,11 @@ const App: React.FC = () => {
         <Route path="/programming" element={<ProgrammingPage />} />
         <Route path="/backend" element={<BackendPage />} />
         <Route path="/django" element={<DjangoPage />} />
+        <Route path="/drf" element={<DrfPage />} />
       </Routes>
     </BrowserRouter>
   );
 };
 
 export default App;
+

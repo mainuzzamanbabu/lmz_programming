@@ -46,6 +46,20 @@ const HomePage: React.FC = () => {
       hoverShadow: 'hover:shadow-orange-300/40',
       badge: 'Full Stack',
     },
+    {
+      id: 'drf',
+      path: '/drf',
+      icon: '🚀',
+      title: 'Django REST Framework',
+      description: 'Build powerful APIs — serializers, viewsets, routers, and a complete school management API project with hands-on code.',
+      topics: 5,
+      gradient: 'from-teal-500 to-cyan-600',
+      ring: 'ring-teal-300',
+      bg: 'bg-teal-50',
+      iconBg: 'bg-teal-500',
+      hoverShadow: 'hover:shadow-teal-300/40',
+      badge: 'API Development',
+    },
   ];
 
   return (
@@ -63,7 +77,7 @@ const HomePage: React.FC = () => {
           </div>
           <nav className="hidden md:flex space-x-6 text-sm font-medium text-slate-500">
             {sections.map(s => (
-              <Link key={s.id} to={s.path} className="hover:text-indigo-600 transition-colors">{s.title.split(' ')[0]}</Link>
+              <Link key={s.id} to={s.path} className="hover:text-indigo-600 transition-colors">{s.id === 'drf' ? 'DRF' : s.title.split(' ')[0]}</Link>
             ))}
           </nav>
         </div>
@@ -90,7 +104,7 @@ const HomePage: React.FC = () => {
 
       {/* Section Cards */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 -mt-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {sections.map((section, index) => (
             <Link
               key={section.id}
